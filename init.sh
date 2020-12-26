@@ -6,7 +6,8 @@
 sudo ln -sf /home/box/web/etc/nginx.conf /etc/nginx/sites-enabled/default
 sudo -s /etc/init.d/nginx restart
 sudo -s ln -sf /home/box/web/etc/hello.py  /etc/gunicorn.d/hello.py
-sudo -s ln -sf /home/box/web/etc/gunicorn-django.conf  /etc/gunicorn.d/gunicorn-django.conf
+sudo ln -sf /home/box/web/etc/django_conf.py /etc/gunicorn.d/gunicorn-django.py
+sudo gunicorn -c /etc/gunicorn.d/gunicorn-django.py ask.wsgi:application
 #sudo ln -sf /home/box/web/etc/hello.py /etc/gunicorn.d/hello.py
 
 
