@@ -4,7 +4,18 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 
+
+class QuestionManager(models.Manager):
+    def new(self):
+        pass
+
+    def popular(self):
+        pass
+
+
 class Question(models.Model):
+    objects = QuestionManager()
+
     title = models.CharField(max_length=255)
     text = models.TextField()
     added_at = models.DateTimeField(blank=True, auto_now_add=True)
@@ -16,8 +27,8 @@ class Question(models.Model):
         return reverse('question', kwargs={'question_id': self.pk})
 
     def __unicode__(self):
-        """Representation of the instance in admin panel and shell"""
         return self.title
+
 
 class Answer(models.Model):
     text = models.TextField()
