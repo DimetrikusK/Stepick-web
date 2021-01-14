@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_GET
 from .models import Question, Answer
+from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import Http404, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
@@ -19,6 +20,10 @@ def main_page(request, *args, **kwargs):
         'questions': page.object_list,
         'page': page,
     })
+
+
+def test(request):
+    return HttpResponse('OK')
 
 
 def question(request):
