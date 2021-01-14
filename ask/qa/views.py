@@ -23,7 +23,7 @@ def main_page(request, *args, **kwargs):
 
 
 def test(request):
-    return HttpResponse('OK')
+    return HttpResponse(status=200)
 
 
 def question(request):
