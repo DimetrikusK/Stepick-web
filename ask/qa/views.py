@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
-import paginate as paginate
+from .utils import paginate
 from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_GET
