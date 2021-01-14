@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import Http404, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
+from .forms import AnswerForm
 
 
 @require_GET
@@ -30,11 +31,12 @@ def question(request, question_id):
     q = get_object_or_404(Question, id=question_id)
     a = q.answer_set.all()
     # a = Answer.objects.filter(question=question_id).order_by('-added_at')
-    form = {'question': question_id}
-    context = {'question': q, 'answers': a}
-    return render(request, 'qa/question.html', context, form)
+    form = AnswerForm(initial={'question': question_id})
+    context = {'question': q, 'answers': a, 'form': form, }
+    return render(request, 'qa/question.html', context)
 
 
+@require_GET
 def popular(request):
     question_list = Question.objects.order_by('-rating')
     paginator, page, limit = paginate(request, question_list)
@@ -44,7 +46,6 @@ def popular(request):
         'limit': limit,
     }
     return render(request, 'qa/popular.html', context)
-
 
 
 def paginate(request, lst):
